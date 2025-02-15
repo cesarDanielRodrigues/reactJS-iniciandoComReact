@@ -25,12 +25,21 @@ export function Post() {
             <a href="">jane.design/doctorcare</a>
           </p>
           <p>
-            <a href="#">#novoprojeto</a> 
-            <a href="#">#nlw</a> 
+            <a href="#">#novoprojeto</a> {" "}
+            <a href="#">#nlw</a> {" "}
             <a href="#">#rocketseat</a>{" "}
           </p>
         </div>
       </div>
+      <form className={styles.commentForm}>
+        <strong>Deixe o seu feedback</strong>
+
+        <textarea placeholder="Deixe o seu comentário"/>
+
+        <footer >
+            <button type="submit">Publicar</button>
+        </footer>
+      </form>
     </aside>
   )
 }
