@@ -3,7 +3,8 @@ import { Avatar } from "./Avatar"
 
 import styles from "./Post.module.css"
 
-export function Post() {
+export function Post(props) {
+
   return (
     <article className={styles.post}>
       <header>
@@ -17,7 +18,7 @@ export function Post() {
             <span>Subtitle</span>
           </div>
         </div>
-        <time title="14 de Fevereiro às 17:09h" datetime="2025-02-14 17:09:00">
+        <time title="14 de Fevereiro às 17:09h" dateTime="2025-02-14 17:09:00">
           Publicado há 1h
         </time>
       </header>
