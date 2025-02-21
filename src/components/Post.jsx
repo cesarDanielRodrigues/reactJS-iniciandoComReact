@@ -18,12 +18,18 @@ export function Post({ author, content, publishedAt }) {
     addSuffix: true,
   })
 
-  const [comments, setComments] = useState([1,2])
+  const [comments, setComments] = useState(["Post de teste"])
+  const [newCommentText, setNewCommentText] = useState("")
 
   function handleCreateNewComment(){
     event.preventDefault()
+    
+    setComments([...comments, newCommentText])
+    setNewCommentText("")
+  }
 
-    setComments([...comments,comments.length + 1])
+  function handleNewCommentChange(){
+    setNewCommentText(event.target.value)
   }
   return (
     <article className={styles.post}>
@@ -58,7 +64,7 @@ export function Post({ author, content, publishedAt }) {
       <form onSubmit={handleCreateNewComment}  className={styles.commentForm}>
         <strong>Deixe o seu feedback</strong>
 
-        <textarea placeholder="Deixe o seu comentário" />
+        <textarea name="comment" value={newCommentText} placeholder="Deixe o seu comentário" onChange={handleNewCommentChange}/>
 
         <footer>
           <button type="submit">Publicar</button>
@@ -66,7 +72,7 @@ export function Post({ author, content, publishedAt }) {
       </form>
       <div className={styles.commentList}>
         {comments.map(comment=>{
-          return <Comment/>
+          return <Comment content={comment}/>
         })}
       </div>
     </article>
