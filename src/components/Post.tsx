@@ -18,19 +18,24 @@ interface Content{
   content: string
 }
 
-interface PostProps{
+export interface PostType{
+  id: number
   author: Author
   publishedAt: Date
   content: Content[]
 }
 
-export function Post({ author, content, publishedAt }:PostProps) {
-  const publishedDateFormatted = format(publishedAt,
+interface PostProps{
+  post: PostType
+}
+
+export function Post({ post }:PostProps) {
+  const publishedDateFormatted = format(post.publishedAt,
                                         "d 'de' LLLL 'às' HH:mm'h'",
                                         { locale: ptBR }
                                        )
 
-  const publishedDateRelativeNow = formatDistanceToNow(publishedAt, {
+  const publishedDateRelativeNow = formatDistanceToNow(post.publishedAt, {
     locale: ptBR,
     addSuffix: true,
   })
@@ -67,21 +72,21 @@ export function Post({ author, content, publishedAt }:PostProps) {
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <Avatar src={author.authorUrl} />
+          <Avatar src={post.author.authorUrl} />
           <div className={styles.authorInfo}>
-            <strong>{author.name}</strong>
-            <span>{author.rule}</span>
+            <strong>{post.author.name}</strong>
+            <span>{post.author.rule}</span>
           </div>
         </div>
         <time title={publishedDateFormatted} 
-          dateTime={publishedAt.toISOString()}
+          dateTime={post.publishedAt.toISOString()}
         >
           {publishedDateRelativeNow}
         </time>
       </header>
       <div>
         <div className={styles.content}>
-          {content.map((line) => {
+          {post.content.map((line) => {
             if (line.type === "paragraph") {
               <p key={line.content}>{line.content}</p>
             } else if (line.type === "link") {
